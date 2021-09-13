@@ -3,6 +3,7 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Event/target
 //https://www.ti-enxame.com/pt/javascript/como-posso-remover-um-estilo-adicionado-com-funcao-.css/970783861/
 //https://www.w3schools.com/
+//https://www.horadecodar.com.br/2020/01/08/como-riscar-uma-palavra-com-css/
 //********************************************* */
 //Implementação: Tonis Torres
 //********************************************* */
@@ -43,6 +44,7 @@ function criateElementLI() {
     let listItem = document.createElement('li');
     listItem.setAttribute("class", "lista-itens")
     listItem.addEventListener("click", functionColor);
+    listenDuploClick();
     listItem.innerText += document.querySelector('#texto-tarefa').value;
     containerList.appendChild(listItem);
 }
@@ -50,7 +52,7 @@ function criateElementLI() {
 /********INICIO FUNÇÃO BACKGROUND******/
 function functionColor(event) {
     eventTarget = document.querySelectorAll('.lista-itens');
-    for (let i = 0; i < eventTarget.length; i+=1) {
+    for (let i = 0; i < eventTarget.length; i += 1) {
         eventTarget[i].style.backgroundColor = "transparent";
     }
     event.target.style.backgroundColor = "rgb(128, 128, 128)";
@@ -59,11 +61,47 @@ function functionColor(event) {
 /*******INICIO FUNÇÃO APAGA TUDO***************  */
 function clearAllToDoList() {
     let containerListAll = document.querySelectorAll('.tarefas');
-    for (let i = 0; i < containerListAll.length; i+=1) {
-        containerListAll[i].innerHTML="";
+    for (let i = 0; i < containerListAll.length; i += 1) {
+        containerListAll[i].innerHTML = "";
     }
 }
 
-/*********INICIO FUNÇÃO APAGA TUDO **************/
+/*********INICIO ESCUTA DA FUNÇÃO APAGA TUDO **************/
 
-buttonClearList.addEventListener("click",clearAllToDoList)
+buttonClearList.addEventListener("click", clearAllToDoList)
+function listenDuploClick() {
+    let elementClass = document.querySelectorAll('.tarefas');
+    for (let i = 0; i < elementClass.length; i++) {
+        elementClass[i].addEventListener("dblclick", testandoEscuta)
+    }
+}
+
+
+function testandoEscuta() {
+    let elementClass = document.querySelector('.tarefas');
+        
+    if(event.target.getAttribute("class")==="lista-itens"){
+        event.target.setAttribute("class", "completed");
+    }else{
+        event.target.setAttribute("class", "lista-itens");  
+    }
+    
+    
+    
+    
+        
+}
+
+
+//listItem.event.target.addEventListener("dbclick", functionScratched);
+
+
+//***********INICIO FUNÇÃO RISCAR COMPLETO********************/
+function functionScratched(event) {
+
+    alert(event.target.getAtribute("class"));
+
+    event.target.setAttribute("class", "completed");
+
+
+}
