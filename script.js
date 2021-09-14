@@ -72,36 +72,30 @@ buttonClearList.addEventListener("click", clearAllToDoList)
 function listenDuploClick() {
     let elementClass = document.querySelectorAll('.tarefas');
     for (let i = 0; i < elementClass.length; i++) {
-        elementClass[i].addEventListener("dblclick", testandoEscuta)
+        elementClass[i].addEventListener("dblclick", functionScratched)
     }
 }
 
-
-function testandoEscuta() {
+/***FUNCIONALIDADE MARCA COMO SELECIONADO OU DESMARCA COM DUPLO CLICK */
+function functionScratched() {
     let elementClass = document.querySelector('.tarefas');
-        
-    if(event.target.getAttribute("class")==="lista-itens"){
+
+    if (event.target.getAttribute("class") === "lista-itens") {
         event.target.setAttribute("class", "completed");
-    }else{
-        event.target.setAttribute("class", "lista-itens");  
+    } else {
+        event.target.setAttribute("class", "lista-itens");
     }
-    
-    
-    
-    
-        
+
 }
 
-
-//listItem.event.target.addEventListener("dbclick", functionScratched);
-
-
-//***********INICIO FUNÇÃO RISCAR COMPLETO********************/
-function functionScratched(event) {
-
-    alert(event.target.getAtribute("class"));
-
-    event.target.setAttribute("class", "completed");
-
-
+/**FUNCIONALIDADE APAGA TODOS SELECIONADOS */
+let buttonRemoveEnd = document.querySelector('#remover-finalizados');
+buttonRemoveEnd.addEventListener("click", clearAllSelected);
+function clearAllSelected() {
+    let elementClass = document.querySelectorAll('.completed');
+    for (let i = 0; i < elementClass.length; i += 1) {
+        if (elementClass[i].getAttribute("class") === "completed") {
+            elementClass[i].remove();
+        }
+    }
 }
